@@ -1,0 +1,9 @@
+.image{
+    height: 300px;
+    width: 100px;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+.download-button{
+    right: 2px;
+}
