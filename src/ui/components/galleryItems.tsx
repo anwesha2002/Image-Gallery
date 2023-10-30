@@ -5,16 +5,22 @@ import {Col, Row} from "react-bootstrap";
 import '../../style/galleryItems.css'
 import {useState} from "react";
 import {ViewPictureModal} from "./viewPictureModal.tsx";
+import {useApi} from "../../context/apiDataprovider.tsx";
 
-export function GalleryItems(){
+type searchResultsProps = {
+    input : string
+}
+
+export function GalleryItems({input} : searchResultsProps){
     const [data] = useFetchData<Gallery[]>([] )
     const [clicked, setClicked] = useState<Gallery|null>(null)
+    const { getPicture } = useApi()
     console.log(data);
 
     return(
         <>
             <Row md={2} lg={3} xs={1} className="gallery">
-                {data.map(picture=>(
+                {getPicture(data,input).map(picture=>(
                     <Col key={picture.id}>
                         <Picture
                             pictures={picture}

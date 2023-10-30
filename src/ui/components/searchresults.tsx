@@ -1,31 +1,24 @@
 import {Gallery} from "../../data/model/gallery.ts";
 import "../../style/searchresults.css"
-import {useState} from "react";
-import {ViewPictureModal} from "./viewPictureModal.tsx";
+import {Dispatch, SetStateAction} from "react";
 
 type searchResultsProps = {
-    searchResults : Gallery[]
+    searchResults : Gallery[],
+    setInput  : Dispatch<SetStateAction<string>>
 }
-export function SearchResults({searchResults} : searchResultsProps){
-     const [clicked , setClicked] = useState<Gallery | null>(null)
-    const onPictureClick = ( searchResults :  Gallery ) =>  {
-        setClicked(searchResults)
+export function SearchResults({searchResults, setInput} : searchResultsProps){
+    const onPictureClick = (  value :string ) =>  {
+        setInput(value);
      }
-
     return(
         <>
             <div className="menu rounded shadow-sm">
                 {searchResults.map(desc=>(
-                    <div onClick={()=> onPictureClick(desc)} className="menu-item" key={desc.id} >
+                    <div onClick={()=> onPictureClick( desc.alt_description)} className="menu-item" key={desc.id} >
                         {desc.alt_description}
                     </div>
                 ))}
-                {clicked &&
-                    <ViewPictureModal
-                        clicked={clicked}
-                        onDismiss={()=>setClicked(null)}
-                    />
-                }
+
             </div>
         </>
     )

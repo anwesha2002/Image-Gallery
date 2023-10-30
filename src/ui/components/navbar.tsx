@@ -1,13 +1,18 @@
 import {Col, Container, Navbar as NavbarBs, Row} from 'react-bootstrap'
 import '../../style/navbar.css'
-import {useState} from "react";
-import {Gallery} from "../../data/model/gallery.ts";
 import {SearchBar} from "./sesrchBar.tsx";
 import {SearchResults} from "./searchresults.tsx";
+import {Gallery} from "../../data/model/gallery.ts";
+import {Dispatch, SetStateAction} from "react";
 
-export function Navbar(){
-    const [searchResults, setSearchResults] = useState<Gallery[]>([])
+type searchResultProps = {
+    searchResults : Gallery[];
+    setSearchResults : Dispatch<SetStateAction<Gallery[]>>,
+    input : string,
+    setInput : Dispatch<SetStateAction<string>>
+}
 
+export function Navbar({searchResults, setSearchResults, input, setInput} : searchResultProps){
     return(
         <Container fluid  >
            <NavbarBs >
@@ -16,9 +21,9 @@ export function Navbar(){
                     <h3>Image Gallery</h3>
                    </Col>
                    <Col className="col-md-4 ">
-                       <SearchBar setSearchResults={setSearchResults}/>
+                       <SearchBar input={input} setInput={setInput} setSearchResults={setSearchResults}/>
                        <div className="d-flex justify-content-center mt-3 " style={{backgroundColor : "#dddd"}}>
-                        <SearchResults  searchResults={searchResults}/>
+                        <SearchResults setInput={setInput}  searchResults={searchResults}/>
                        </div>
                    </Col>
                    <Col className="col-md-5 ">

@@ -13,13 +13,9 @@ export function Picture({pictures,onPictureClick } : PictureProps){
     const {
         urls,
         user,
-        likes
+        likes,
+        alt_description
     } = pictures
-
-    //const [showDialogue, setShowDialogue] = useState(false)
-
-
-
     return(
         <>
             <Card className="mt-4 shadow-sm " onClick={()=> onPictureClick(pictures)}>
@@ -28,7 +24,10 @@ export function Picture({pictures,onPictureClick } : PictureProps){
                     src={urls.thumb}
                 />
                 <Card.Body className="d-flex flex-row justify-content-between">
-                    <h5>{user.name}</h5>
+                    <div>
+                        <h5>{user.name}</h5>
+                        <p className="text-muted fs-13 d-flex flex-column justify-content-start align-items-center">{alt_description}</p>
+                    </div>
                     <div className="d-flex justify-content-center align-items-center">
                         <FaThumbsUp className="m-2"/>
                         {likes}
