@@ -1,16 +1,16 @@
-import {createContext,  ReactNode, useContext, useState} from "react";
-import {Gallery, PopUpModalProps} from "../data/model/gallery.ts";
-import {useFetchData} from "../data/remote/api.ts";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
+import { Image} from "../data/model/gallery.ts";
+import axios from "axios";
+const clientId = process.env.REACT_APP_UNSPLASH_CLIENT_ID
 
 type GalleryContextProviderProps = {
     children : ReactNode
 }
 
 type GalleryPicture = {
-    GetPicture : ( searchParam : string) => PopUpModalProps[],
     SearchPicture : (input : string) => void,
-    //setInput : Dispatch<SetStateAction<string>>
-    searchPictureResults : () => Gallery[]
+    searchPictureResults : () => Image[]
+    data : Image[];
 }
 
 const GAlleryContext = createContext({} as GalleryPicture)
@@ -20,30 +20,44 @@ export function useApi(){
 }
 
 export function GalleryContextProvider({children} : GalleryContextProviderProps){
-    const [searchParams] = useState(["alt_description"]);
-    //const [input, setInput] = useState("")
-    //const [data] = useFetchData<PopUpModalProps[]>(input,[]);
-    const [searchResults, setSearchResults] = useState<PopUpModalProps[]>([])
-    //setInput("cat")
+    const [data, setData] = useState<Image[]>([])
+    const [input, setInput] = useState("All")
+    const [searchResults, setSearchResults] = useState<Image[]>([])
 
-    function GetPicture(searchParam : string){
-        const [data] = useFetchData<PopUpModalProps[]>(searchParam,[]);
-        return data.filter((item)=>{
+    function GetPicture(input : string){
+        return (
+            axios.get(
+                `https://api.unsplash.com/search/collections?client_id=${clientId}&per_page=50&query=${input}`
+            )
+        )
+
+        /*return data.filter((item)=>{
            return searchParams.some((newItem ) =>{
                return (
                    item[newItem as keyof typeof item].toString().toLowerCase().indexOf(searchParam.toLowerCase())>-1
                )
            })
-        })
+        })*/
     }
 
+
+
+    useEffect(()=>{
+        const FetchData = async () => {
+            try {
+                const response = await GetPicture(input);
+                setData(response.data.results);
+            }catch (err){
+                console.log(err)
+            }
+        }
+        FetchData();
+    },[input])
+
     function SearchPicture(input : string){
-        const [data] = useFetchData<PopUpModalProps[]>(input,[]);
-        const result = data.filter(item=>{
-            return input && item && item.alt_description && item.alt_description.toLowerCase().includes(input);
-        })
-        setSearchResults(result);
-        console.log(searchResults)
+        input?  setInput(input)  : " ALL";
+        setSearchResults(data);
+        console.log("searchResults",searchResults)
     }
 
     function searchPictureResults(){
@@ -52,7 +66,7 @@ export function GalleryContextProvider({children} : GalleryContextProviderProps)
 
 
     return(
-        <GAlleryContext.Provider value={{GetPicture, SearchPicture, searchPictureResults}}>
+        <GAlleryContext.Provider value={{data, SearchPicture, searchPictureResults}}>
             {children}
         </GAlleryContext.Provider>
     )

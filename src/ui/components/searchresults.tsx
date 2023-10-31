@@ -18,8 +18,8 @@ export function SearchResults({ setInput} : searchResultsProps){
         <>
             <div className="menu rounded shadow-sm">
                 {searchResults.map(desc=>(
-                    <div onClick={()=> onPictureClick( desc.alt_description)} className="menu-item" key={desc.id} >
-                        {desc.alt_description}
+                    <div onClick={()=> onPictureClick( desc.title)} className="menu-item" key={desc.id} >
+                        {desc.title}
                     </div>
                 ))}
 

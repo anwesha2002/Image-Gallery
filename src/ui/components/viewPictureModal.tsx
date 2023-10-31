@@ -1,25 +1,25 @@
-import { PopUpModalProps} from "../../data/model/gallery.ts";
+import { Image} from "../../data/model/gallery.ts";
 import {Button, Card, Modal} from "react-bootstrap";
 import '../../style/Picture.css'
 import { FaInstagram, FaThumbsUp, FaTwitter} from "react-icons/fa";
 
 interface ViewPictureModalProps {
     onDismiss : () => void
-    clicked?: PopUpModalProps
+    clicked?: Image
 }
 
-const PopUp = ({urls, user, likes} : PopUpModalProps)  => {
+const PopUp = ({tags, links, user, cover_photo, title} : Image)  => {
 
     return(
         <Card >
             <Card.Title className="position-relative">
                 <Card.Img
                     className="image"
-                    src={urls.raw}
+                    src={cover_photo.urls.raw}
                 />
 
                 <a
-               // href={links.download}
+                href={links.download}
                 download={user.username}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -37,10 +37,11 @@ const PopUp = ({urls, user, likes} : PopUpModalProps)  => {
                 </div>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                     <FaThumbsUp className="me-1 "/>
-                    {likes}
+                    {cover_photo.likes}
                 </div>
             </Card.Body>
             <Card.Body>
+                <div>{title}</div>
                 <div className="d-flex justify-content-start align-items-start fs-13">
                     {user.social.instagram_username &&
                         <p className="text-muted">
@@ -60,14 +61,18 @@ const PopUp = ({urls, user, likes} : PopUpModalProps)  => {
                         </a>
                     }
                 </div>
+                <div className="mt-3">
+                    <h6>Related Tags</h6>
+                    {tags.map(item=>(
+                        <Button className="m-2 text-black" variant="outline-success" size="sm">{item.title}</Button>
+                    ))}
+                </div>
             </Card.Body>
         </Card>
     )
 }
 
 export function ViewPictureModal({onDismiss,clicked } : ViewPictureModalProps){
-    //const [data] = useFetchData<PopUpModalProps[]>([])
-
     return(
         <>
             <Modal show onHide={onDismiss} >

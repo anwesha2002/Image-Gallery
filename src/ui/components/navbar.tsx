@@ -5,8 +5,6 @@ import {SearchResults} from "./searchresults.tsx";
 import {Dispatch, SetStateAction} from "react";
 
 type searchResultProps = {
-    //searchResults : Gallery[];
-    //setSearchResults : Dispatch<SetStateAction<Gallery[]>>,
     input : string,
     setInput : Dispatch<SetStateAction<string>>
 }
