@@ -1,27 +1,32 @@
 import {FaSearch} from "react-icons/fa";
 import {Dispatch, SetStateAction} from "react";
-import {Gallery} from "../../data/model/gallery.ts";
-import {useFetchData} from "../../data/remote/api.ts";
+// import {Gallery} from "../../data/model/gallery.ts";
+// import {useFetchData} from "../../data/remote/api.ts";
+import {useApi} from "../../context/apiDataprovider.tsx";
+// import {useSearchParams} from "react-router-dom";
 
 type setSearchResultsProps = {
-    setSearchResults : Dispatch<SetStateAction<Gallery[]>>,
+    //setSearchResults : Dispatch<SetStateAction<Gallery[]>>,
     input : string,
     setInput : Dispatch<SetStateAction<string>>
 }
 
-export function SearchBar({setSearchResults, input, setInput} : setSearchResultsProps){
-    const [data] = useFetchData<Gallery[]>([]);
+export function SearchBar({ input, setInput} : setSearchResultsProps){
+    //const [input, setInput] = useState("")
 
-    const SearchedData = (value : string) => {
+    //const [data] = useFetchData<Gallery[]>([]);
+    const { SearchPicture  } = useApi()
+
+    /*const SearchedData = (value : string) => {
         const result = data.filter(item =>{
             return value && item && item.alt_description && item.alt_description.toLowerCase().includes(value);
         })
         setSearchResults(result)
         console.log(result)
-    }
+    }*/
     function handleSearchData(value : string){
         setInput(value)
-        SearchedData(value);
+        SearchPicture(value);
     }
     /*function debounce(cb , delay = 1000){
         let timeout :  NodeJS.Timeout;

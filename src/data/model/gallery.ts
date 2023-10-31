@@ -7,15 +7,15 @@ interface user {
         portfolio_url : string
     }
     profile_image : {medium : string},
-    links : {
+    links  : {
         photos : string
     }
 }
 
-interface links{
+/*interface links{
     download : string,
     self : string
-}
+}*/
 
 interface urls {
     thumb : string,
@@ -26,9 +26,12 @@ export interface Gallery extends user, urls{
     likes : number,
     id : string,
     alt_description : string,
+    user : user,
+    urls : urls,
+    //links : links
 }
 
-export interface PopUpModalProps extends Gallery, links {
+export interface PopUpModalProps extends Gallery {
     views : number,
     likes : number,
     id : string,

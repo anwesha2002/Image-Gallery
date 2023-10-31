@@ -1,15 +1,14 @@
-import {useFetchData} from "../../data/remote/api.ts";
-import {Gallery, PopUpModalProps} from "../../data/model/gallery.ts";
+import { PopUpModalProps} from "../../data/model/gallery.ts";
 import {Button, Card, Modal} from "react-bootstrap";
 import '../../style/Picture.css'
 import { FaInstagram, FaThumbsUp, FaTwitter} from "react-icons/fa";
 
 interface ViewPictureModalProps {
     onDismiss : () => void
-    clicked?: Gallery
+    clicked?: PopUpModalProps
 }
 
-const PopUp = ({urls, links, user, likes} : PopUpModalProps)  => {
+const PopUp = ({urls, user, likes} : PopUpModalProps)  => {
 
     return(
         <Card >
@@ -20,7 +19,7 @@ const PopUp = ({urls, links, user, likes} : PopUpModalProps)  => {
                 />
 
                 <a
-                href={links.download}
+               // href={links.download}
                 download={user.username}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -67,18 +66,15 @@ const PopUp = ({urls, links, user, likes} : PopUpModalProps)  => {
 }
 
 export function ViewPictureModal({onDismiss,clicked } : ViewPictureModalProps){
-    const [data] = useFetchData<PopUpModalProps[]>([])
+    //const [data] = useFetchData<PopUpModalProps[]>([])
 
     return(
         <>
             <Modal show onHide={onDismiss} >
                 <Modal.Body className="position-relative ">
                     {clicked &&
-                        data.map(picture =>(
-                            picture.id === clicked.id ? <PopUp key={picture.id} {...picture}/> : null
-                        ))
+                        <PopUp key={clicked.id} {...clicked}/>
                     }
-
                 </Modal.Body>
                 <Modal.Header closeButton className="position-absolute rounded shadow-lg" style={{right : 0, backgroundColor: "white"}}>
                 </Modal.Header>

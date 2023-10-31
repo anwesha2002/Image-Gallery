@@ -1,11 +1,11 @@
 import {Card} from "react-bootstrap";
-import {Gallery} from "../../data/model/gallery.ts";
+import { PopUpModalProps} from "../../data/model/gallery.ts";
 import '../../style/Picture.css'
 import { FaThumbsUp }  from 'react-icons/fa'
 
 type PictureProps = {
-    pictures : Gallery,
-    onPictureClick : (pictures : Gallery) => void
+    pictures : PopUpModalProps,
+    onPictureClick : (pictures : PopUpModalProps) => void
 }
 
 

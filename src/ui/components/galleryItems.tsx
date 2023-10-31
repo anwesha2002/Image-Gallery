@@ -1,5 +1,4 @@
-import {useFetchData} from "../../data/remote/api.ts";
-import {Gallery} from "../../data/model/gallery.ts";
+import { PopUpModalProps} from "../../data/model/gallery.ts";
 import {Picture} from "./Picture.tsx";
 import {Col, Row} from "react-bootstrap";
 import '../../style/galleryItems.css'
@@ -12,15 +11,15 @@ type searchResultsProps = {
 }
 
 export function GalleryItems({input} : searchResultsProps){
-    const [data] = useFetchData<Gallery[]>([] )
-    const [clicked, setClicked] = useState<Gallery|null>(null)
-    const { getPicture } = useApi()
-    console.log(data);
+    //const [data] = useFetchData<Gallery[]>([] )
+    const [clicked, setClicked] = useState<PopUpModalProps|null>(null)
+    const { GetPicture } = useApi()
+    //console.log(data);
 
     return(
         <>
             <Row md={2} lg={3} xs={1} className="gallery">
-                {getPicture(data,input).map(picture=>(
+                {GetPicture(input).map(picture=>(
                     <Col key={picture.id}>
                         <Picture
                             pictures={picture}

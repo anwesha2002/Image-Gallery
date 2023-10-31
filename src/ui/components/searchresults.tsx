@@ -1,15 +1,19 @@
-import {Gallery} from "../../data/model/gallery.ts";
 import "../../style/searchresults.css"
 import {Dispatch, SetStateAction} from "react";
+import {useApi} from "../../context/apiDataprovider.tsx";
 
 type searchResultsProps = {
-    searchResults : Gallery[],
+    //searchResults : Gallery[],
     setInput  : Dispatch<SetStateAction<string>>
 }
-export function SearchResults({searchResults, setInput} : searchResultsProps){
+export function SearchResults({ setInput} : searchResultsProps){
+
+    const { searchPictureResults } = useApi()
     const onPictureClick = (  value :string ) =>  {
         setInput(value);
      }
+     const searchResults = searchPictureResults();
+
     return(
         <>
             <div className="menu rounded shadow-sm">
