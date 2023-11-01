@@ -1,7 +1,8 @@
-import { Image} from "../../data/model/gallery.ts";
+import { Image} from "../../data/Model/Gallery.ts";
 import {Button, Card, Modal} from "react-bootstrap";
-import '../../style/Picture.css'
+import '../../Style/GalleryPicture.css'
 import { FaInstagram, FaThumbsUp, FaTwitter} from "react-icons/fa";
+import {useApi} from "../Context/ImageProvider.tsx";
 
 interface ViewPictureModalProps {
     onDismiss : () => void
@@ -9,7 +10,7 @@ interface ViewPictureModalProps {
 }
 
 const PopUp = ({tags, links, user, cover_photo, title} : Image)  => {
-
+    const { searchQuery } = useApi()
     return(
         <Card >
             <Card.Title className="position-relative">
@@ -41,7 +42,9 @@ const PopUp = ({tags, links, user, cover_photo, title} : Image)  => {
                 </div>
             </Card.Body>
             <Card.Body>
-                <div>{title}</div>
+                {searchQuery &&
+                    <div>{title}</div>
+                }
                 <div className="d-flex justify-content-start align-items-start fs-13">
                     {user.social.instagram_username &&
                         <p className="text-muted">
@@ -61,12 +64,14 @@ const PopUp = ({tags, links, user, cover_photo, title} : Image)  => {
                         </a>
                     }
                 </div>
-                <div className="mt-3">
-                    <h6>Related Tags</h6>
-                    {tags.map(item=>(
-                        <Button className="m-2 text-black" variant="outline-success" size="sm">{item.title}</Button>
-                    ))}
-                </div>
+                <Card.Footer>
+                    <div className="mt-3">
+                        <h6>Related Tags</h6>
+                        {tags.map(item=>(
+                            <Button className="m-1 text-black" variant="outline-success" size="sm">{item.title}</Button>
+                        ))}
+                    </div>
+                </Card.Footer>
             </Card.Body>
         </Card>
     )

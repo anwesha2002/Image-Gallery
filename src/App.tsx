@@ -1,6 +1,6 @@
 import './App.css'
-import {Home} from "./ui/pages/home.tsx";
-import {GalleryContextProvider} from "./context/apiDataprovider.tsx";
+import {Home} from "./ui/Pages/home.tsx";
+import {GalleryContextProvider} from "./ui/Context/ImageProvider.tsx";
 
 function App() {
 

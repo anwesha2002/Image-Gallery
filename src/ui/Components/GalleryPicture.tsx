@@ -1,16 +1,16 @@
 import {Card} from "react-bootstrap";
-import { Image} from "../../data/model/gallery.ts";
-import '../../style/Picture.css'
+import { Image} from "../../data/Model/Gallery.ts";
+import '../../Style/GalleryPicture.css'
 import { FaThumbsUp }  from 'react-icons/fa'
+import {useApi} from "../Context/ImageProvider.tsx";
 
 type PictureProps = {
     pictures : Image,
     onPictureClick : (pictures : Image) => void,
-    input : string
 }
 
-
-export function Picture({pictures,onPictureClick, input } : PictureProps){
+export function GalleryPicture({pictures,onPictureClick } : PictureProps){
+    const { searchQuery } = useApi()
     const {
         cover_photo,
         user,
@@ -26,7 +26,7 @@ export function Picture({pictures,onPictureClick, input } : PictureProps){
                 <Card.Body className="d-flex flex-row justify-content-between">
                     <div className="d-flex flex-column justify-content-start align-items-start">
                         <h5>{user.name}</h5>
-                        {input &&
+                        {searchQuery &&
                             <p className="text-muted fs-13 d-flex flex-column justify-content-start align-items-center">{title}</p>
                         }
                     </div>
