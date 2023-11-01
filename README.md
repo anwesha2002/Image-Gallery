@@ -10,3 +10,24 @@ Features
 - Infinite Scrolling: As the user scrolls down, more images are loaded, providing a seamless browsing experience.
 - High-Quality Images: The application fetches high-resolution images from Unsplash, ensuring excellent visual quality.
 - Responsive Design: The gallery is designed to work on various screen sizes, making it accessible across different devices.
+
+## Clone the repository to your local system:
+
+    git clone https://github.com/your-username/react-image-gallery.git
+    
+## Navigate to the project directory:
+
+    cd image-gallery
+
+## Install project dependencies:
+
+    npm install
+    
+## Create an .env file in the project's root directory and set your Unsplash API key. You can obtain an API key by signing up on the Unsplash API platform.
+
+    REACT_APP_UNSPLASH_API_KEY=your-api-key
+    
+## Start the application:
+
+    npm start
+    Open your web browser and visit http://localhost:3000 to access the React Image Gallery.
