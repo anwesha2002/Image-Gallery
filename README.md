@@ -3,7 +3,7 @@
 The React Image Gallery is a web application that allows users to search and view images based on their search queries. It's built using React and integrates with the Unsplash API to fetch high-quality images. This simple and user-friendly gallery application provides an intuitive interface for searching and displaying images.
 
 ## Image Gallery
-![Uploading bandicam 2023-11-01 10-33-20-088.gif…]()
+![bandicam 2023-11-01 10-33-20-088](https://github.com/anwesha2002/Image-Gallery/assets/116761608/331176f6-0ef9-4420-8a97-851423f4e5ef)
 
 Features
 - Image Search: Users can enter keywords in the search bar to retrieve images related to their query.
