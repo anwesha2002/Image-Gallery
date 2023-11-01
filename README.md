@@ -13,7 +13,7 @@ Features
 
 ## Clone the repository to your local system:
 
-    git clone [https://github.com/your-username/react-image-gallery.git](https://github.com/anwesha2002/Image-Gallery.git)
+    git clone https://github.com/anwesha2002/Image-Gallery.git
     
 ## Navigate to the project directory:
 
