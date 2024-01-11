@@ -18,7 +18,7 @@ export function GalleryPicture({pictures,onPictureClick } : PictureProps){
     } = pictures
     return(
         <>
-            <Card className="mt-4 shadow-sm " onClick={()=> onPictureClick(pictures)}>
+            <Card className="mt-4 shadow-sm imageCursor" onClick={()=> onPictureClick(pictures)}>
                 <Card.Img
                     className="d-flex justify-content-center align-items-center flex-row image"
                     src={cover_photo.urls.thumb}
